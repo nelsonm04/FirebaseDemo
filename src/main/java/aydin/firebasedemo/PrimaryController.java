@@ -30,6 +30,9 @@ public class PrimaryController {
     private TextField nameTextField;
 
     @FXML
+    private TextField phoneTextField; // New phone number field
+
+    @FXML
     private TextArea outputTextArea;
 
     @FXML
@@ -97,11 +100,14 @@ public class PrimaryController {
                 listOfUsers.clear();
                 for (QueryDocumentSnapshot document : documents)
                 {
-                    outputTextArea.setText(outputTextArea.getText()+ document.getData().get("Name")+ " , Age: "+
-                            document.getData().get("Age")+ " \n ");
-                    System.out.println(document.getId() + " => " + document.getData().get("Name"));
-                    person  = new Person(String.valueOf(document.getData().get("Name")),
-                            Integer.parseInt(document.getData().get("Age").toString()));
+                    outputTextArea.appendText(document.getData().get("Name") + " , Age: " +
+                            document.getData().get("Age") + " , Phone: " + document.getData().get("PhoneNumber") + "\n");
+
+                    person = new Person(
+                            String.valueOf(document.getData().get("Name")),
+                            Integer.parseInt(document.getData().get("Age").toString()),
+                            String.valueOf(document.getData().get("PhoneNumber"))
+                    );
                     listOfUsers.add(person);
                 }
             }
@@ -131,7 +137,7 @@ public class PrimaryController {
         UserRecord userRecord;
         try {
             userRecord = DemoApp.fauth.createUser(request);
-            System.out.println("Successfully created new user with Firebase Uid: " + userRecord.getUid()
+            System.out.println("Successfully c reated new user with Firebase Uid: " + userRecord.getUid()
             + " check Firebase > Authentication > Users tab");
             return true;
 
@@ -150,6 +156,7 @@ public class PrimaryController {
         Map<String, Object> data = new HashMap<>();
         data.put("Name", nameTextField.getText());
         data.put("Age", Integer.parseInt(ageTextField.getText()));
+        data.put("PhoneNumber", phoneTextField.getText());
 
         //asynchronously write data
         ApiFuture<WriteResult> result = docRef.set(data);

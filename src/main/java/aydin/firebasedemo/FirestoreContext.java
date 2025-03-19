@@ -16,9 +16,9 @@ public class FirestoreContext {
         try {
 
             FileInputStream serviceAccount =
-                    new FileInputStream("src/main/resources/aydin/firebasedemo/key.json");
+                    new FileInputStream("C:\\Users\\Geone\\IdeaProjects\\FirebaseDemo\\src\\main\\resources\\Firebase\\capstoneKey.json");
 
-            FirebaseOptions options = FirebaseOptions.builder()
+            FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                     .build();
 
@@ -30,6 +30,5 @@ public class FirestoreContext {
         }
         return FirestoreClient.getFirestore();
     }
-
 
 }

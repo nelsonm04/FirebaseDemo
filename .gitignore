@@ -9,7 +9,7 @@ target/
 .idea/compiler.xml
 .idea/libraries/
 *.iws
-*.iml
+*.imlj
 *.ipr
 
 ### Eclipse ###
@@ -36,4 +36,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
-/src/main/resources/aydin/firebasedemo/key.json
+
+### Ignore Firebase Keys ###
+src/main/resources/Firebase/capstoneKey.json
